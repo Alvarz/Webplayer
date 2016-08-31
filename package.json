@@ -2,6 +2,7 @@
   "name": "SpotifyApp",
   "version": "0.0.2",
   "description": "Spotify desktop app",
+
   "main": "main.js",
   "scripts": {
     "start": "electron ."
