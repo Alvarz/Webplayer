@@ -48,7 +48,7 @@ function createWindow() {
   mainWindow.webContents.on('did-finish-load', () => {
     console.log("finished");
     /*renderer functions because my page have not html file*/
-    m_notificationsMod.load(mainWindow);
+    // m_notificationsMod.load(mainWindow);
 
   })
 

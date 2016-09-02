@@ -1,12 +1,12 @@
 var notificationsMod = {
   a: 1,
   b: 2,
-  load: (mainWindow) => {
+  load: (mainWindow, title, body, img = null) => {
     return mainWindow.webContents.executeJavaScript(`
-    var notification = new Notification('Title', {
-      body: 'Lorem Ipsum Dolor Sit Amet',
-      title: "Hello",
-      icon: 'C:/images/icon.png',
+    var notification = new Notification('` + title + `', {
+      body: '` + body + `',
+      title: '` + title + `',
+      icon: '` + img + `',
       // To prevent sound
       //silent:true,
     });
