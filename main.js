@@ -1,14 +1,19 @@
 const electron = require('electron')
-  // Module to control application life.
+
+// Module to control application life.
 const app = electron.app
   // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
+
+const ipc = electron.ipcRenderer;
 
 const path = require('path')
 
 const m_notificationsMod = require("./notificationsMod");
 
 const m_loadPepper = require("./loadPepper");
+
+
 
 m_loadPepper.load(app, path);
 // Specify flash path, supposing it is placed in the same directory with main.js.
@@ -23,25 +28,37 @@ function createWindow() {
     width: 1024,
     height: 768,
     webPreferences: {
-      plugins: true
+      plugins: true,
+      webSecurity: false,
+      allowDisplayingInsecureContent: true,
+      allowRunningInsecureContent: true
     }
   })
 
 
   // and load the index.html of the app.
-  // mainWindow.loadURL(`file://${__dirname}/index.html`)
-  mainWindow.loadURL(`https://play.spotify.com/?http=1`)
+  mainWindow.loadURL(`file://${__dirname}/index.html`)
+    // mainWindow.loadURL(`https://play.spotify.com/?http=1`)
     // mainWindow.loadURL(`http://www.adobe.com/software/flash/about/`)
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // test notification
   mainWindow.webContents.on('did-finish-load', () => {
-
+    console.log("finished");
     /*renderer functions because my page have not html file*/
     m_notificationsMod.load(mainWindow);
+
   })
+
+
+
+
+  mainWindow.webContents.on('media-started-playing', (event) => {
+    console.log("media playing");
+    console.log(event);
+  });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
