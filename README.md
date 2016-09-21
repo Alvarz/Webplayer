@@ -1,3 +1,3 @@
-# SpotifyApp
+# Developers app
 
-Spotify web app comming soon
+Developers app comming soon

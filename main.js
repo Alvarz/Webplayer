@@ -9,13 +9,8 @@ const ipc = electron.ipcRenderer;
 
 const path = require('path')
 
-const m_notificationsMod = require("./notificationsMod");
-
-const m_loadPepper = require("./loadPepper");
 
 
-
-m_loadPepper.load(app, path);
 // Specify flash path, supposing it is placed in the same directory with main.js.
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -28,10 +23,10 @@ function createWindow() {
     width: 1024,
     height: 768,
     webPreferences: {
-      plugins: true,
       webSecurity: false,
       allowDisplayingInsecureContent: true,
-      allowRunningInsecureContent: true
+      allowRunningInsecureContent: true,
+      preload: path.resolve(path.join(__dirname, 'app/preload.js'))
     }
   })
 
@@ -51,9 +46,6 @@ function createWindow() {
     // m_notificationsMod.load(mainWindow);
 
   })
-
-
-
 
   mainWindow.webContents.on('media-started-playing', (event) => {
     console.log("media playing");
