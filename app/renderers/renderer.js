@@ -13,9 +13,17 @@ const markdown = require("markdown").markdown;
 
 // You can use console.log(notification); to see more available properties
 onload = () => {
-  const webview = document.getElementById('designer')
+  const webview = document.getElementById('designer');
 
-  console.log(markdown.toHTML("Hello *World*!"));
+  const textInput = document.getElementById("text-input");
+  const preview = document.getElementById("preview");
+
+  const title = document.getElementById("title");
+  const previewTitle = document.getElementById('preview-title');
+
+  Editor(title, previewTitle, true);
+
+  Editor(textInput, preview);
   // const playPause = document.getElementById('play-pause')
   // window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
 
@@ -36,4 +44,16 @@ onload = () => {
   }
 
 
+}
+
+var Editor = (input, preview, isInput = false) => {
+  this.update = function() {
+    if (!isInput) {
+      preview.innerHTML = markdown.toHTML(input.value);
+    } else {
+      preview.value = markdown.toHTML(input.value);
+    }
+  };
+  input.editor = this;
+  this.update();
 }

@@ -7,11 +7,25 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
   </head>
 
-  <body style="overflow:hidden;">
-    <h1 class="label-info">hello world</h1>
+  <body>
+    <div class="container-fluid">
+      <h1>note</h1>
+      <div class="row">
+        <div class="col-md-6 col-xs-12" style="margin-bottom:15px;margin-top:15px;">
+          <input id="title" type="text" class="form-control" oninput="this.editor.update()" value="**enter** title" name="title">
+        </div>
+        <div class="col-md-6 col-xs-12" style="margin-bottom:15px;margin-top:15px;">
+          <input id="preview-title" type="text" class="form-control" value="" name="title">
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <textarea class="form-control" id="text-input" oninput="this.editor.update()">Type **Markdown** here.</textarea>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <div id="preview"> </div>
+        </div>
+      </div>
+    </div>
   </body>
-  <!-- <script src="./node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
-  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script> -->
   <script>
     // You can also require other files to run in this process
     require('./app/renderers/renderer.js')

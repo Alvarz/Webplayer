@@ -33,11 +33,8 @@ function createWindow() {
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`)
-    // mainWindow.loadURL(`https://play.spotify.com/?http=1`)
-    // mainWindow.loadURL(`http://www.adobe.com/software/flash/about/`)
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+    // Open the DevTools.
+  mainWindow.webContents.openDevTools()
 
   // test notification
   mainWindow.webContents.on('did-finish-load', () => {
