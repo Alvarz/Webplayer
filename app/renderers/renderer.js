@@ -5,27 +5,29 @@ const {
   ipcRenderer
 } = require('electron')
 
-const markdown = require("markdown").markdown;
-
-
-
-
 
 // You can use console.log(notification); to see more available properties
 onload = () => {
+
   const webview = document.getElementById('designer');
 
-  const textInput = document.getElementById("text-input");
-  const preview = document.getElementById("preview");
+  loadPage('main');
 
-  const title = document.getElementById("title");
-  const previewTitle = document.getElementById('preview-title');
+  $(document).on('click', '#Create', () => {
+    loadPage('takeNote');
+  });
 
-  Editor(title, previewTitle, true);
+  $(document).on('click', '#Notes', () => {
+    loadPage('main');
+  });
 
-  Editor(textInput, preview);
-  // const playPause = document.getElementById('play-pause')
-  // window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
+  $(document).on('click', '#EditNotes', () => {
+    loadPage('editNote');
+  });
+
+
+
+
 
   const loadstart = () => {
     console.log("loading...");
@@ -46,14 +48,35 @@ onload = () => {
 
 }
 
-var Editor = (input, preview, isInput = false) => {
-  this.update = function() {
-    if (!isInput) {
-      preview.innerHTML = markdown.toHTML(input.value);
-    } else {
-      preview.value = markdown.toHTML(input.value);
+
+
+var loadPage = (page) => {
+  $.ajax({
+    url: "views/" + page + '.html',
+    type: 'GET',
+    tryCount: 0,
+    retryLimit: 3,
+    data: {},
+    async: true,
+    beforeSend: function() {
+      //$('.container-fluid').html("<h1>loading...</h1>");
+      //$('#contentCenter').html(loading('table',0));
+      // $("#loading-table").show();
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      this.tryCount++;
+      if (textStatus != 'abort') {
+        if (this.tryCount <= this.retryLimit) {
+          console.log(textStatus + ' ' + errorThrown);
+          $.ajax(this);
+          return;
+        }
+      }
+      return;
+    },
+    complete: function() {},
+    success: function(data) {
+      $("#mainContent").html(data);
     }
-  };
-  input.editor = this;
-  this.update();
+  });
 }

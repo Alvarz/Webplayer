@@ -1,0 +1,24 @@
+<h1>note</h1>
+<div class="row">
+  <div class="col-md-6 col-xs-12" style="margin-bottom:15px;margin-top:15px;">
+    <input id="title" type="text" class="form-control" value="" name="title">
+  </div>
+  <div class="col-md-6 col-xs-12" style="margin-bottom:15px;margin-top:15px;">
+    <div id="preview-title" class="form-control">
+      <em>title</em> markdown
+    </div>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <textarea class="form-control" id="text-input"></textarea>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <div class="panel">
+      <div id="preview"> Type <strong>Markdown</strong> here</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // You can also require other files to run in this process
+  require('./app/renderers/EditMarkdown.js')
+</script>

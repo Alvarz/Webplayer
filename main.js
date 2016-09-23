@@ -25,8 +25,7 @@ function createWindow() {
     webPreferences: {
       webSecurity: false,
       allowDisplayingInsecureContent: true,
-      allowRunningInsecureContent: true,
-      preload: path.resolve(path.join(__dirname, 'app/preload.js'))
+      allowRunningInsecureContent: true
     }
   })
 
