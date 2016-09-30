@@ -11,6 +11,8 @@ onload = () => {
 
   const webview = document.getElementById('designer');
 
+  $.material.init()
+
   loadPage('main');
 
   $(document).on('click', '#Create', () => {

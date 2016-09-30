@@ -27,6 +27,36 @@ ul {
 }
 
 
+.dropup > .dropdown-menu{
+  background-color: transparent !important;
+  min-width: 0 !important;
+  height:auto;
+  border:none !important;
+  left: 7px;
+}
+.dropup > .dropdown-menu > li >  a{
+  margin-bottom:10px;
+  border-radius: 50% !important;
+  font-size: 15px;
+}
+
+
+.mat-action{
+position: fixed !important;
+top: 85% !important;
+left:90%;
+z-index: 99999999;
+}
+.mat-action a:focus, .mat-action a:hover{
+  background-color: #009688 !important;
+}
+
+.size-action{
+  left:-50px;
+  min-width: 100px !important;
+}
+
+
 .nav > li > a {
     text-decoration: none;
     color:#737373;
@@ -82,4 +112,8 @@ border-color: transparent !important;
 
 .background-orange{
   background-color: #FFD180;
+}
+
+.sidebar{
+  margin-top: 100px;
 }
