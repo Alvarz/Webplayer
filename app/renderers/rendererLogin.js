@@ -13,33 +13,17 @@ onload = () => {
 
   $.material.init()
 
-  var auth = getData('auth');
 
-  var auth = {
-    name: "Carlos Alvarez",
-    email: "email@email.com",
-    github_id: "QQ131312231"
-  }
+  loadPage('register');
 
-  if (auth == null) {
-    location.href = "register.html";
-  }
-
-  loadPage('main');
-
-  $(document).on('click', '#Create', () => {
-    loadPage('takeNote');
+  $(document).on('click', '#login', () => {
+    loadPage('login');
   });
 
-  $(document).on('click', '#Notes', () => {
-    loadPage('main');
+  $(document).on('click', '#register', () => {
+
+    loadPage('register');
   });
-
-  $(document).on('click', '#EditNotes', () => {
-    loadPage('editNote');
-  });
-
-
 
 
 
@@ -90,6 +74,7 @@ var loadPage = (page) => {
     },
     complete: function() {},
     success: function(data) {
+      console.log("here");
       $("#mainContent").html(data);
     }
   });

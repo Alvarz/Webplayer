@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <!-- <link rel="stylesheet" href="./app/assets/css/sidebar.css" media="screen" title="no title" charset="utf-8"> -->
+    <link rel="stylesheet" href="./app/assets/css/style.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="node_modules/bootstrap-material-design/dist/css/ripples.min.css" media="screen" title="no title" charset="utf-8">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div id="mainContent" class="row">
+
+
+      </div>
+    </div>
+    <!-- /#wrapper -->
+  </body>
+  <!--In Electron, this is the correct way to include jQuery-->
+
+  <script>
+    window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
+  </script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="node_modules/bootstrap-material-design/dist/js/material.min.js" charset="utf-8"></script>
+  <script src="node_modules/bootstrap-material-design/dist/js/ripples.min.js" charset="utf-8"></script>
+  <script src="app/assets/js/sidebar.js" charset="utf-8"></script>
+  <script>
+    require('./app/renderers/rendererLogin.js')
+    $.material.init()
+  </script>
+
+</html>
