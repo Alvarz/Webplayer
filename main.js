@@ -7,7 +7,7 @@ const BrowserWindow = electron.BrowserWindow
 
 const ipc = electron.ipcRenderer;
 
-const path = require('path')
+const path = require('path');
 
 
 
@@ -27,28 +27,14 @@ function createWindow() {
       allowDisplayingInsecureContent: true,
       allowRunningInsecureContent: true
     }
-  })
+  });
 
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/views/index.html`)
     // Open the DevTools.
   mainWindow.webContents.openDevTools()
-
-  // test notification
-  mainWindow.webContents.on('did-finish-load', () => {
-    console.log("finished");
-    /*renderer functions because my page have not html file*/
-    // m_notificationsMod.load(mainWindow);
-
-  })
-
-  mainWindow.webContents.on('media-started-playing', (event) => {
-    console.log("media playing");
-    console.log(event);
-  });
-
-  // Emitted when the window is closed.
+    // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
@@ -72,7 +58,6 @@ app.on('window-all-closed', function() {
     app.quit()
   }
 })
-
 
 app.on('activate', function() {
   // On OS X it's common to re-create a window in the app when the

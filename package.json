@@ -11,10 +11,7 @@
         "url": "git+https://github.com/Alvarz/Developers-app"
     },
     "keywords": [
-        "Electron",
-        "quick",
-        "start",
-        "tutorial"
+        "Electron"
     ],
     "author": "Carlos Alvarez",
     "license": "CC0-1.0",
