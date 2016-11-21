@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Webtorrent-app</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+
+  </head>
+
+  <body>
+
+
+  </body>
+  <!--In Electron, this is the correct way to include jQuery-->
+
+  <script>
+    window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js');
+  </script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+  <script>
+    // You can also require other files to run in this process
+    require('../app/renderers/renderer.js')
+  </script>
+
+</html>

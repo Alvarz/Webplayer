@@ -3,113 +3,71 @@
 // All of the Node.js APIs are available in this process.
 const {
   ipcRenderer
-} = require('electron')
+} = require('electron');
+
+
+const WebTorrent = require('webtorrent');
+const client = new WebTorrent();
+const fs = require('fs');
+
+var sintel = 'https://webtorrent.io/torrents/sintel.torrent'
+
+var sintel = '../../torrent/sintel.torrent'
+var magnetURI =
+  'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d&dn=sintel.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel-1024-surround.mp4';
+
+var sintel = 'https://yts.ag/torrent/download/BE046ED20B048C4FB86E15838DD69DADB27C5E8A';
 
 
 // You can use console.log(notification); to see more available properties
 onload = () => {
 
-  const webview = document.getElementById('designer');
+  var download = sintel
+  client.add(download, {
+    path: './download/'
+  }, function(torrent) {
+    console.log('Client is downloading:', torrent.infoHash)
 
-  $.material.init()
-
-  var auth = getData('auth');
-
-  var auth = {
-    name: "Carlos Alvarez",
-    email: "email@email.com",
-    github_id: "QQ131312231"
-  }
-
-  if (auth == null) {
-    location.href = "register.html";
-  }
-
-  loadPage('main');
-
-  $(document).on('click', '#Create', () => {
-    loadPage('takeNote');
+    torrent.files.forEach(function(file) {
+      // Display the file by appending it to the DOM. Supports video, audio, images, and
+      // more. Specify a container element (CSS selector or reference to DOM node).
+      file.appendTo('body');
+    })
   });
 
-  $(document).on('click', '#Notes', () => {
-    loadPage('main');
-  });
+  client.on('torrent', function(torrent) {
+    console.log('Established connection')
+    torrent.on('done', function() {
+      console.log('Finished downloading file')
+      var file = torrent.files[0]
+      console.log(file);
+      file.appendTo('body', function(err, elem) {
+        if (err) throw err // file failed to download or display in the DOM
+        console.log('New DOM node with the content', elem)
+      })
+    })
+    torrent.on('download', function(chunksize) {
+      // console.log('total downloaded: ' + torrent.downloaded);
+      // console.log('download speed: ' + torrent.downloadSpeed);
+      console.log('progress: ' + torrent.progress);
 
-  $(document).on('click', '#EditNotes', () => {
-    loadPage('editNote');
-  });
-
-
-
-
-
-  const loadstart = () => {
-    console.log("loading...");
-  }
-
-  const loadstop = () => {
-    console.log("loaded");
-    // if (!webview.isDevToolsOpened()) {
-    //   webview.openDevTools();
-    // }
-
-  }
-  if (webview != null) {
-    webview.addEventListener('did-start-loading', loadstart)
-    webview.addEventListener('did-stop-loading', loadstop)
-  }
-
-
-}
-
-
-
-var loadPage = (page) => {
-  $.ajax({
-    url: "views/" + page + '.html',
-    type: 'GET',
-    tryCount: 0,
-    retryLimit: 3,
-    data: {},
-    async: true,
-    beforeSend: function() {
-      //$('.container-fluid').html("<h1>loading...</h1>");
-      //$('#contentCenter').html(loading('table',0));
-      // $("#loading-table").show();
-    },
-    error: function(xhr, textStatus, errorThrown) {
-      this.tryCount++;
-      if (textStatus != 'abort') {
-        if (this.tryCount <= this.retryLimit) {
-          console.log(textStatus + ' ' + errorThrown);
-          $.ajax(this);
-          return;
-        }
-      }
-      return;
-    },
-    complete: function() {},
-    success: function(data) {
-      $("#mainContent").html(data);
-    }
-  });
-}
+    })
+    torrent.on('ready', function() {
+      console.log("ready");
+      var file = torrent.files[0]
+        // Display the file by adding it to the DOM. Supports video, audio, image, etc. files
+      file.appendTo('body')
+    });
+    torrent.on('metadata', function(metadata) {
+      console.log(metadata);
+    })
+    torrent.on('warning', function(err) {
+      console.warn(err);
+    })
+    torrent.on('error', function(err) {
+      console.error(err);
+    })
+  })
 
 
-var getData = (key) => {
-  return JSON.parse(localStorage.getItem(key));
-}
-
-var getDataSession = (key) => {
-  return JSON.parse(sessionStorage.getItem(key));
-}
-
-var setData = (key, val) => {
-  var value = JSON.stringify(val);
-  localStorage.setItem(key, value);
-}
-
-var setDataSession = (key, val) => {
-  var value = JSON.stringify(val);
-  sessionStorage.setItem(key, value);
 }
